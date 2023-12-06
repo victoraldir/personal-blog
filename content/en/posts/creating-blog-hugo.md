@@ -188,4 +188,4 @@ Deploying our blog straight from our laptop is not a good idea. We need to autom
 
 ### Github Actions
 
-TODO
+place env variables https://github.com/victoraldir/personal-blog/settings/variables/actions
