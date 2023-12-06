@@ -1,0 +1,33 @@
+baseURL = 'https://blog.vhmontes.com/'
+languageCode = 'en-us'
+title = 'Victor'
+theme = 'ananke'
+
+DefaultContentLanguage = "en"
+
+googleAnalytics = "G-8Q2PH7N75Q"
+enableRobotsTXT = true
+
+[languages]
+  [languages.en]
+    title = "Victor"
+    weight = 1
+    contentDir = "content/en"
+    # languageDirection = 'rtl' for Right-To-Left languages
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[[params.ananke_socials]]
+name = "twitter"
+url = "https://twitter.com/victoraldir"
+
+[[params.ananke_socials]]
+name = "github"
+url = "https://github.com/victoraldir"
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/victoraldir/"

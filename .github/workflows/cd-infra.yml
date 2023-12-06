@@ -1,0 +1,38 @@
+name: CD to push infra changes
+on:
+  push:
+    paths:
+      - 'infra/**'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform fmt
+        id: fmt
+        run: |
+           make format-infra
+
+      - name: Terraform Init
+        id: init
+        run: |
+           make init-infra
+      
+      - name: Terraform Validate
+        id: validate
+        run: |
+           make validate-infra
+      
+      - name: Terraform Plan
+        id: plan
+        run: |
+           make plan-infra
+
+      - name: Terraform Apply
+        id: apply
+        if: github.ref == 'refs/heads/main'
+        run: |
+           make deploy-infra

@@ -1,0 +1,33 @@
+name: CD to publish Hugo site to S3
+on:
+  push:
+    paths:
+      - archetypes/**
+      - layouts/**
+      - themes/**
+      - content/**
+      - static/**
+      - hugo.toml
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+       
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.120.4'
+
+      - name: Build
+        run: |
+           make build
+        
+      - name: Publish
+        if: github.ref == 'refs/heads/main'
+        run: |
+           make publish
