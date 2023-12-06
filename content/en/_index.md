@@ -1,5 +1,5 @@
 ---
-title: "Code it, ship it, and learn it"
+title: "Code it, ship it, and learn it. Test"
 
 description: "All cloud. All the time."
 # 1. To ensure Netlify triggers a build on our exampleSite instance, we need to change a file in the exampleSite directory.
