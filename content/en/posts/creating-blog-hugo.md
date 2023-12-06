@@ -2,7 +2,6 @@
 title = 'Blog on the edge'
 date = 2023-12-05T23:59:15+01:00
 draft = false
-bug
 +++
 
 ## Introduction
