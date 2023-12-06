@@ -1,5 +1,8 @@
 name: CD to publish Hugo site to S3
 on:
+  pull_request:
+    branches:
+      - main
   push:
     paths:
       - archetypes/**
