@@ -10,7 +10,7 @@ on:
       - hugo.toml
 
 jobs:
-  tests:
+  hugo:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
