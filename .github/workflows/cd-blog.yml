@@ -1,13 +1,15 @@
 name: CD to publish Hugo site to S3
 on:
   push:
-    paths:
-      - archetypes/**
-      - layouts/**
-      - themes/**
-      - content/**
-      - static/**
-      - hugo.toml
+    # paths:
+    #   - archetypes/**
+    #   - layouts/**
+    #   - themes/**
+    #   - content/**
+    #   - static/**
+    #   - hugo.toml
+    branches:
+      - main
 
 jobs:
   hugo:

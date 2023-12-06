@@ -1,8 +1,10 @@
 name: CD to push infra changes
 on:
   push:
-    paths:
-      - 'infra/**'
+    # paths:
+    #   - 'infra/**'
+    branches:
+      - main
 
 jobs:
   terraform:
