@@ -1,6 +1,6 @@
 .PHONY: publish build
 
-publish: build
+publish: build init-infra
 	@echo "Publishing web..."
 	@cd public && aws s3 sync . s3://$(shell cd infra && terraform output bucket_name)
 	@echo "Invalidating CloudFront cache..."
