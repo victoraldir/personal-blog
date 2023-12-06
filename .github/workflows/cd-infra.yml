@@ -1,5 +1,8 @@
 name: CD to push terraform changes
 on:
+  pull_request:
+    branches:
+      - main
   push:
     paths:
       - 'infra/**'
