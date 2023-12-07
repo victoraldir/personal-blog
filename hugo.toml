@@ -1,6 +1,6 @@
 baseURL = 'https://blog.vhmontes.com/'
 languageCode = 'en-us'
-title = 'Victor'
+title = 'Victor Hugo'
 theme = 'ananke'
 
 DefaultContentLanguage = "en"
@@ -10,7 +10,7 @@ enableRobotsTXT = true
 
 [languages]
   [languages.en]
-    title = "Victor"
+    title = 'Victor Hugo'
     weight = 1
     contentDir = "content/en"
     # languageDirection = 'rtl' for Right-To-Left languages
