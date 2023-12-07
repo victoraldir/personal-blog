@@ -31,3 +31,7 @@ url = "https://github.com/victoraldir"
 [[params.ananke_socials]]
 name = "linkedin"
 url = "https://www.linkedin.com/in/victoraldir/"
+
+[services]
+  [services.disqus]
+    shortname = 'victorhugoaldir'

@@ -1,11 +1,17 @@
 ---
 title: "About"
-description: "A few years ago, while visiting or, rather, rummaging about Notre-Dame, the author of this book found, in an obscure nook of one of the towers, the following word, engraved by hand upon the wall: —ANANKE."
-featured_image: '/images/Victor_Hugo-Hunchback.jpg'
+description: "Here's a litte something about me and why I'm doing this"
+featured_image: '/images/about-header.jpg'
 menu:
   main:
     weight: 1
 ---
-{{< figure src="/images/Victor_Hugo-Hunchback.jpg" title="Illustration from Victor Hugo et son temps (1881)" >}}
+{{< figure src="/images/me.jpg" title="Victor Hugo - Software Engineer" >}}
 
-_The Hunchback of Notre-Dame_ (French: _Notre-Dame de Paris_) is a French Romantic/Gothic novel by Victor Hugo, published in 1831. The original French title refers to Notre Dame Cathedral, on which the story is centered. English translator Frederic Shoberl named the novel The Hunchback of Notre Dame in 1833 because at the time, Gothic novels were more popular than Romance novels in England. The story is set in Paris, France in the Late Middle Ages, during the reign of Louis XI.
+_Software engineering_ (Portuguese: _Engenharia de Software_) is an engineering-based approach to software development. I am the one in the middle enforcing engeering principles to design, develop, maintain, test, and evaluate computer software. I am also a photographer, a hobbyist, and I love to travel.
+
+I am currently working as a Software Reliabiliy Engineer at [N26](https://n26.com/) with almost 10 years of experience in the field.
+
+As a seasoned software engineer, I possess extensive experience working on large-scale, multilayered, and distributed applications across a variety of industries, including e-commerce, telecommunications, health, financial, and aviation. With a proven track record of success, I am adept at solving complex problems with precision and quality, while consistently meeting project deadlines. Additionally, I possess excellent collaboration skills and am comfortable working with globally distributed teams.
+
+My objective with this blog is to share my knowledge and experience with the community. I hope you enjoy it!

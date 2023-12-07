@@ -1,26 +1,23 @@
 +++
-title = 'Blog on the edge'
+title = 'Blog on the edge with Hugo and AWS'
+featured_image= "/images/creating-blog-hugo/cloudfront_blog-overall.png"
 date = 2023-12-05T23:59:15+01:00
 draft = false
 +++
 
 ## Introduction
 
-Today I will show you how to create a blog with Hugo. Hugo is a static site generator written in Go. It is optimized for speed, easy use and configurability. Hugo takes a directory with content and templates and renders them into a full HTML website. Hugo is a great tool for creating blogs because it is fast, easy to use and has a lot of themes. 
-
-In this blog post I will show you not only how to create a blog with Hugo but also how to host it on AWS and how to deploy it with Github Actions. This will allow you to create a very robust infrastructure for your blog to scale globally. So let's get started!
-
-## Motivation
+Hey, welcome to the very first blog post of this blog! In this blog post I will show you how I created this blog with Hugo and how I host it on AWS. I will also show you how I deploy it with Github Actions.
 
 I have been thinking about creating a blog for a long time. However, with everyday life and work, I never found the time to do it. While looking for interesting projects to contribute, I came across **Hugo**. I was impressed by its speed and ease of use. I decided to create a blog with Hugo and host it on AWS.
 
 While thinking about the scope of this project, I realised that the challenge of creating a blog with Hugo and hosting it on AWS would be a great very first blog post. So here we are! Hopefully you will find this blog post useful and interesting.
 
-## Installation
+## Quick introduction to Hugo
 
-First of all, we need to install Hugo. You can download the latest version for your platform from [https://gohugo.io/installation/](https://gohugo.io/installation/)
+First of all, we need to install Hugo. You can download the latest version for your platform from [https://gohugo.io/installation/](https://gohugo.io/installation/). Hugo is a very interesting tool. It is a static site generator written in Go. It is very fast and easy to use. It is also very flexible. You can use it to create a blog, a documentation site, a portfolio, etc. Hugo uses Markdown to create content. Markdown is a lightweight markup language that is very easy to learn. You can find more information about Markdown [here](https://www.markdownguide.org/).
 
-### Create a new site
+### Creating a new site
 
 Now we can create a new site with the following command:
 
@@ -46,7 +43,7 @@ Now we can add some content to our blog. We can do this with the following comma
 hugo new posts/creating-blog-hugo.md
 ```
 
-This will create a new file in the content/posts directory. You can edit this file with your favorite editor. I will use [Visual Studio Code](https://code.visualstudio.com/) for this blog.
+This will create a new file in the content/posts directory. You can edit this file with your favorite editor. I usually use [Visual Studio Code](https://code.visualstudio.com/) for editing Markdown files as it has a lot of useful extensions for Markdown. You can find more information about Markdown extensions for Visual Studio Code [here](https://code.visualstudio.com/docs/languages/markdown).
 
 ### Run the server
 
@@ -66,13 +63,13 @@ Now we can publish our blog with the following command:
 hugo
 ```
 
-This will create a public directory with all the files needed to publish your blog. You can upload these files to your server. In our case we will use S3 static website hosting and CloudFront to serve our blog.
+This will create a public directory with all the files needed to publish your blog. You can use any web server to serve your blog. I used AWS S3 to host my blog with Cloudfront. I will explain how to do this in the next section.
 
-## Architecture
+## Architecture of this blog
 
-Our architecture is mainly based on **CloudFront and S3 as origin**. We will use Route 53 to manage our domain name and Certificate Manager to manage our SSL/TLS certificates, therefore enabling HTTPS for our blog. In a nutshell, our architecture will look like this:
+The architecture of this blog is mainly based on **CloudFront and S3 as origin**. I use Route 53 to manage domain name resolution and Certificate Manager to manage SSL/TLS certificates, so that I can enable HTTPS for this blog. In a nutshell, the architecture looks like this:
 
-![Scenario 1: Across columns](/creating-blog-hugo/cloudfront_blog-overall.png)
+![General Architecture](/images/creating-blog-hugo/cloudfront_blog-overall.png)
 
 Flow of a request:
 
@@ -85,21 +82,21 @@ Flow of a request:
 7. CloudFront caches the page and returns it to the user.
 8. The user receives the page and renders it in the browser.
 
-CloudFront plays a very important role in our architecture. It is a content delivery network (CDN) that delivers content to end users with low latency and high transfer speeds. CloudFront is a global network of edge locations and regional edge caches. Edge locations are located in major cities around the world. Regional edge caches are located in major cities within a region. What does this mean? It means that CloudFront will cache our content in edge locations and regional edge caches, and serve it to end users with low latency and high transfer speeds. 
+CloudFront plays a very important role in this architecture. It is a content delivery network (CDN) that delivers content to end users with low latency and high transfer speeds. CloudFront is a global network of edge locations and regional edge caches. Edge locations are located in major cities around the world. Regional edge caches are located in major cities within a region. What does this mean? It means that CloudFront caches the content of this blog in edge locations and regional edge caches, and serve it to end users with low latency and high transfer speeds. 
 
 The diagram below shows the CloudFront layers that a request goes through before reaching the origin.
 
-![Scenario 1: Across columns](/creating-blog-hugo/cloudfront_blog.png)
+![Clodfront layers](/images/creating-blog-hugo/cloudfront_blog.png)
 
-## How can I know if my blog is being served from the cache?
+## How can I check if this blog is being served from the cache?
 
-You can use the **X-Cache** header to know if your blog is being served from the cache. The X-Cache header has the following values:
+You can use the **X-Cache** header to know your request is being served from the cache. The X-Cache header has the following values:
 
 - **X-Cache: Miss** - The object was not in the cache.
 - **X-Cache: Hit** - The object was in the cache.
 - **X-Cache: RefreshHit** - The object was in the cache but it was stale. CloudFront refreshed the object in the background and served the stale object to the user.
 
-Here is an example of a request to my blog:
+Here is an example of a request to this blog from Barcelona:
 
 ```bash
 curl -I https://blog.vhmontes.com
@@ -125,9 +122,9 @@ I am located in Barcelona, so this is a good sign. If I had set up my blog to be
 
 ## Now let's wrap up everything in terraform
 
-I am not a big fan of ClickOps, so because of that, let's make things repeatable and scalable as it should always be. For this, we will use terraform to create our infrastructure. 
+I am not a big fan of ClickOps, so because of that, I prefer to make things repeatable and scalable as it should always be. For this, I have used terraform to create my infrastructure. 
 
-The terraform code for this blog is available on [infra folder](https://github.com/victoraldir/personal-blog/infra) of this repository. For your convenience we've created a [Makefile](https://github.com/victoraldir/personal-blog/Makefile) to help you with the terraform commands. 
+The terraform code for this blog is available on [infra folder](https://github.com/victoraldir/personal-blog/tree/main/infra). For your (and mine) convenience I've created a [Makefile](https://github.com/victoraldir/personal-blog/tree/main/Makefile) to help you with the terraform commands. 
 
 I wish I could have made this process a one single command, but unfortunately it is was not possible. So before we jump to some terraform plan and apply commands, we need to do some manual steps.
 
@@ -145,7 +142,7 @@ Replace `{BUCKET_NAME}` with the name of your bucket and `{BUCKET_REGION}` with 
 
 #### Buy a domain name via Amazon Route 53
 
-Now we need to buy a domain name for the bloga, we can use AWS Route 53 for this. From AWS Route 53 you can buy a domain name either via the AWS console or via the AWS CLI. I found it easier to do it via the AWS console. You can find more information about this process [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html). Once you have bought your domain name, you will see that AWS has created a hosted zone for you automatically. That's the one our terraform code will use.
+Now we need to buy a domain name for the blog, we can use AWS Route 53 for this. From AWS Route 53 you can buy a domain name either via the AWS console or via the AWS CLI. I found it easier to do it via the AWS console. You can find more information about this process [here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html). Once you have bought your domain name, you will see that AWS has created a hosted zone for you automatically. That's the one our terraform code will use.
 
 #### Terraform apply it!
 
@@ -183,9 +180,43 @@ That's a lot of resources, right? Imagine having to create all of them manually.
 
 ### Github Actions to deploy our blog
 
-Deploying our blog straight from our laptop is not a good idea. We need to automate this process. For this, we will use Github Actions. Github Actions is a CI/CD tool that allows us to automate our workflows. The workflow used to deploy our blog is available [here](https://github.com/victoraldir/personal-blog/.github/workflows/deploy.yml).
+Deploying our blog straight from our laptop is not a good idea. We need to automate this process. For this, we will use Github Actions. Github Actions is a CI/CD tool that allows us to automate our workflows. The workflow used to deploy our blog is available [here](https://github.com/victoraldir/personal-blog/tree/main/.github/workflows).
 
+There are two workflows:
 
-### Github Actions
+- **cd-blog.yml** - This workflow is triggered when a new commit is pushed to the main branch or when a pull request is created. It will run the following steps:
+  - Checkout the code.
+  - Setup Hugo
+  - Build the blog.
+  - Deploy the blog to S3. (only if the push is to the main branch)
 
-place env variables https://github.com/victoraldir/personal-blog/settings/variables/actions
+- **cd-infra.yml** - This workflow is triggered when a new commit is pushed to the infra branch or when a pull request is created. It will run the following steps:
+  - Checkout the code.
+  - Setup Terraform.
+  - Check formatting.
+  - Init terraform.
+  - Validate terraform.
+  - Plan terraform.
+  - Apply terraform. (only if the push is to the main branch)
+
+### Configuring Repository secrets
+
+In order to deploy our blog, we need to configure some secrets in our repository. These secrets are:
+
+- **AWS_ACCESS_KEY_ID** - AWS access key ID.
+- **AWS_SECRET_ACCESS_KEY** - AWS secret access key.
+- **AWS_DEFAULT_REGION** - AWS region.
+
+You can find more information about how to configure repository secrets [here](https://docs.github.com/en/actions/reference/encrypted-secrets).
+
+The configuration should look like this:
+
+![Scenario 1: Across columns](/images/creating-blog-hugo/github-secrets.png)
+
+### Github repository with the blog
+
+The repository with the blog is available [here](https://github.com/victoraldir/personal-blog). Feel free to fork it and use it as a template for your own blog.
+
+## Conclusion
+
+In this blog post we have seen how to create a blog with Hugo and how to host it on AWS. We have also seen how to deploy our blog with Github Actions. I hope you have found this blog post useful and interesting. If you have any questions or comments, please leave them in the comments section below. I will be happy to answer them.
