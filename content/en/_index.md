@@ -3,7 +3,7 @@ title: "Code it, ship it, and learn it."
 
 description: "All cloud. All the time."
 # 1. To ensure Netlify triggers a build on our exampleSite instance, we need to change a file in the exampleSite directory.
-theme_version: '2.8.2'
+theme_version: '2.9.1'
 cascade:
   featured_image: '/images/default.jpg'
 ---
