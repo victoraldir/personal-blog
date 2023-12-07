@@ -144,7 +144,7 @@ Now we need to buy a domain name for the blog, we can use AWS Route 53 for this.
 
 #### Terraform apply it!
 
-Before we run the commands to create our infrastructure, check the [terraform.tfvars](https://github.com/victoraldir/infra/terraform.tfvars) file and replace the values with your own. There you will find the following variables:
+Before we run the commands to create our infrastructure, check the [terraform.tfvars](https://github.com/victoraldir/personal-blog/blob/main/infra/terraform.tfvars) file and replace the values with your own. There you will find the following variables:
 
 ``` yaml
 domain_name                 = "vhmontes.com" #Your own domain name
