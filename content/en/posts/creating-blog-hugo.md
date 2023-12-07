@@ -5,7 +5,7 @@ date = 2023-12-05T23:59:15+01:00
 draft = false
 +++
 
-Welcome to the very first blog post of this blog! In this blog post I will show you how I created this blog with Hugo and how I host it on AWS. I will also show you how I deploy it with Github Actions.
+Welcome to the very first post of this blog! Today, I will show you how I created this blog with Hugo and how I hosted it on AWS. I will also show you how I deployed it with Github Actions.
 
 I have been thinking about creating a blog for a long time. However, with everyday life and work, I never found the time to do it. While looking for interesting projects to contribute, I came across **Hugo**. I was impressed by its speed and ease of use. I decided to create a blog with Hugo and host it on AWS.
 
@@ -76,7 +76,7 @@ Flow of a request:
 3. CloudFront checks if the requested page is in the cache.
 4. If the page is in the cache, CloudFront returns the page to the user.
 5. If the page is not in the cache, CloudFront requests the page from the origin, in our case S3.
-6. S3 returns the **public** content of Hugo to CloudFront.
+6. S3 returns the public content of Hugo to CloudFront.
 7. CloudFront caches the page and returns it to the user.
 8. The user receives the page and renders it in the browser.
 
