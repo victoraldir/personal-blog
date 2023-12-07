@@ -8,7 +8,7 @@ menu:
 ---
 {{< figure src="/images/me.jpg" title="Victor Hugo - Software Engineer" >}}
 
-_Software engineering_ (Portuguese: _Engenharia de Software_) is an engineering-based approach to software development. I am the one in the middle enforcing engeering principles to design, develop, maintain, test, and evaluate computer software. I am also a photographer, a hobbyist, and I love to travel.
+I am the one in the middle enforcing engeering principles to design, develop, maintain, test, and evaluate computer software. I am also a photographer, a hobbyist, and I love to travel.
 
 I am currently working as a Software Reliabiliy Engineer at [N26](https://n26.com/) with almost 10 years of experience in the field.
 
