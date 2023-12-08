@@ -13,6 +13,7 @@ resource "aws_cloudfront_distribution" "blog_distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_s3_bucket.blog_bucket.id
+    compress         = true
 
     forwarded_values {
       query_string = false
