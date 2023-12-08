@@ -11,6 +11,7 @@ on:
       - content/**
       - static/**
       - hugo.toml
+      - Makefile
     branches:
       - main
 
