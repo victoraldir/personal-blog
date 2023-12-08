@@ -12,6 +12,7 @@ on:
       - static/**
       - hugo.toml
       - Makefile
+      - .github/workflows/cd-blog.yml
     branches:
       - main
 
