@@ -8,7 +8,7 @@ publish: build init-infra
 	@echo "Done publishing web."
 
 build:
-	@echo "Building web..."
+	@echo "Building web for live..."
 	@HUGO_ENV=production hugo --minify
 	@echo "Done building web."
 
