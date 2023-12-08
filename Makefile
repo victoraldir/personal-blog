@@ -9,7 +9,7 @@ publish: build init-infra
 
 build:
 	@echo "Building web..."
-	@hugo --minify
+	@HUGO_ENV=production hugo --minify
 	@echo "Done building web."
 
 run-local:
