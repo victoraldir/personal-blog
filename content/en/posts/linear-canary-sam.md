@@ -134,3 +134,4 @@ From your console you'll see something like this:
 
 You can find the code for this example in the following Github repository: [Birthday countdown API](https://github.com/victoraldir/sam-go-api). The repository contains a Makefile to make things more convenient. The app has been developed using Go, but you can use any other language supported by AWS Lambda.
 
+
