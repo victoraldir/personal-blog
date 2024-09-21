@@ -6,11 +6,13 @@ draft = true
 
 Hey there! It's been a while since I last wrote a post, I hope I can keep up with the pace now. Today I wanted to talk about a very interesting topic related to response streaming in Go. This is a very powerful feature that allows us to send data to the client in chunks, instead of waiting for the entire response to be ready (buffered). This expands the limit of lambdas to a whole new level, allowing us to process large amounts of data without worrying about the very tiny limit of 6MB for the response payload with buffered responses.
 
-## My motivation to explore this feature
+## Motivation to explore this feature
 
-I have been trying to make myvideohunter.com to be able to download videos from reddit. However, this time I needed to transcode the video from a playlist file (m3u8) to a single video file (mp4). As you know, the whole backbone of myvidehunter.com is serverless, so I needed to build a "transcoder" lambda that would be able to transcode the video and send the response back to the client in chunks.
+I have been trying to make [myvideohunter.com](https://www.myvideohunter.com/) to be able to download videos from Reddit. However, this time I needed to transcode the video from a playlist file (m3u8) to a single video file (mp4). As you know, the whole backbone of myvidehunter.com is serverless, so I needed to build a "transcoder" lambda that would be able to transcode the video and send the response back to the client. In a nustshell, something like this:
 
-Then I stumbled in the very first limitation of buffered responses: **the 6MB limit**. I was not able to send the entire video back to the client in a single response, so I needed to find a way to send the video in chunks. That's when I found out about response streaming technique that AWS Lambda supports.
+![Motivation overview](/images/response-streaming-go/lambda-ffmpeg-pipe-stream.png)
+
+That was when I've stumbled on the very first limitation of buffered responses: **the 6MB limit**. I was not able to send the entire video back to the client in a single response, so I needed to find a way to send the video in chunks. That's when I found out about response streaming technique that AWS Lambda supports.
 
 ## Response streaming in Go
 
@@ -43,16 +45,63 @@ Now you can send the response back to the client in chunks in a different go rou
 
 ## Sample project
 
+### Overview of sample project
+
+![Sample projct architecture](/images/response-streaming-go/lambda-ffmpeg-sample-architecture.png)
+
+### Description
+
 I have created a sample project that you can find in my [GitHub repository](https://github.com/victoraldir/response-streaming-go). This project is a simple API that returns a video file in chunks. In fact, it will return any kind of binary you request, but in the example I am returning a MP4 video file. 
 
 The scope if very simple:
 
 1. The client sends a GET request to the CloudFront URL providing a URL containing the video file.
 
-2. The lambda will instantiate a new HTTP client, request the video file from the URL provided and pipe the client response to the response writer back to the client in a different go routine.
+2. If it's not a cache hit, the CloudFront will forward the request to the Lambda function URL.
+
+3. The lambda will instantiate a new HTTP client, request the video file from the URL provided and pipe the client response to the response writer back to the client **in a different go routine**.
 
 3. The client will receive the video file in chunks.
 
+**CloudFront** plays a very important role in this architecture. It is the one that will cache the response from the Lambda function and serve it to the client. Each lambda invocation is very costly, so we want to avoid invoking the lambda function as much as possible. 
+
+In this example, I have created a custom cache policy with a cache key settings to include the `url` query parameter in the cache key. This way, if the client requests the same video file, the CloudFront will serve the response from the cache. Note that when request is served from the cache, the speed is much faster than when the request is served from the Lambda function.
+
+### How to deploy
+
+To deploy the sample project, you need to have the AWS CLI and SAM CLI installed in your machine. You also need to have an AWS account and the credentials properly configured in your machine.
+
+Tasks are automated with Tasksfile, so you can just run the following command to deploy the project:
+
+```bash
+$ tasks deploy
+```
+
+This command will deploy the project to your AWS account. After the deployment is finished, you will see the CloudFront URL in the output. You can use this URL to test the API.
+
+### How to test
+
+To test the API, you can use the following command:
+
+```bash
+$ curl -o video.mp4 https://<cloudfront-url>?url=https://www.pexels.com/download/video/7230308
+```
+
+This command will download the video file from the URL provided and save it in a file called `video.mp4`.
+
+### How to remove
+
+To remove the project from your AWS account, you can run the following command:
+
+```bash
+$ tasks remove
+```
+
+This command will remove all resources created by the project.
+
+### How much it costs?
+
+The cost of this project is zero as long as you are within the free tier limits of AWS.
 
 ## Limitations
 
@@ -64,5 +113,5 @@ There are some limitations that you need to be aware of when using response stre
 
 ## Conclusion
 
-Response streaming in Go is a very powerful feature that allows us to send data to the client in chunks. It opens a whole new world of possibilities for serverless applications, and in my case, it allowed me to implement a transcoding layer for myvidehunter.com fully serverless. 
+Response streaming in Go is a very powerful feature that allows us to send data to the client in chunks. It opens a whole new world of possibilities for serverless applications, and in my case, it allowed me to implement a transcoding fleet for myvidehunter.com only using AWS Lambda.
 
