@@ -1,7 +1,8 @@
 +++
-title = 'Response Streaming Go'
+title = 'Lambda response streaming in Go'
 date = 2024-09-21T23:28:16+02:00
-draft = true
+featured_image= "/images/response-streaming-go/lambda-ffmpeg-sample-architecture.png"
+draft = false
 +++
 
 Hey there! It's been a while since I last wrote a post, I hope I can keep up with the pace now. Today I wanted to talk about a very interesting topic related to response streaming in Go. This is a very powerful feature that allows us to send data to the client in chunks, instead of waiting for the entire response to be ready (buffered). This expands the limit of lambdas to a whole new level, allowing us to process large amounts of data without worrying about the very tiny limit of 6MB for the response payload with buffered responses.
