@@ -1,10 +1,8 @@
 baseURL = 'https://blog.vhmontes.com/'
 languageCode = 'en-us'
 title = 'Victor Hugo'
-theme = 'ananke'
-
+theme = ["github.com/theNewDynamic/gohugo-theme-ananke/v2"]
 DefaultContentLanguage = "en"
-
 googleAnalytics = "G-8Q2PH7N75Q"
 enableRobotsTXT = true
 
@@ -15,23 +13,41 @@ enableRobotsTXT = true
     contentDir = "content/en"
     # languageDirection = 'rtl' for Right-To-Left languages
 
+[params]
+  favicon = "favicon.ico"
+  description = "Victor Hugo's blog"
+  author = "Victor Hugo Montes"
+
+[params.ananke.social.follow]
+icons = true
+new_window_icon = true
+networks = [
+  "bluesky",
+  "linkedin",
+  "github"
+]
+
+[params.ananke.social.share]
+icons = true
+networks = [
+  "bluesky",
+  "linkedin",
+  "github"
+]
+
+[params.ananke.social.github]
+  profilelink = "https://github.com/victoraldir"
+
+[params.ananke.social.linkedin]
+  profilelink = "https://www.linkedin.com/in/victoraldir/"
+
+[params.ananke.social.bluesky]
+  profilelink = "https://bsky.app/profile/vhmontes.com"
+
 [sitemap]
   changefreq = "monthly"
   priority = 0.5
   filename = "sitemap.xml"
 
-[[params.ananke_socials]]
-name = "twitter"
-url = "https://twitter.com/victoraldir"
-
-[[params.ananke_socials]]
-name = "github"
-url = "https://github.com/victoraldir"
-
-[[params.ananke_socials]]
-name = "linkedin"
-url = "https://www.linkedin.com/in/victoraldir/"
-
-[services]
-  [services.disqus]
-    shortname = 'https-blog-vhmontes-com'
+[services.disqus]
+  shortname = 'https-blog-vhmontes-com'

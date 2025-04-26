@@ -1,10 +1,12 @@
 ---
-title: "Code it, ship it, and learn it."
+title: "Code, Ship, Learn."
 
-description: "All cloud. All the time."
+description: "All on the cloud. All the time."
 # 1. To ensure Netlify triggers a build on our exampleSite instance, we need to change a file in the exampleSite directory.
-theme_version: '2.9.1'
+theme_version: '2.12.0'
 cascade:
   featured_image: '/images/default.jpg'
 ---
-Hey, Victor Hugo here. I'm an SRE that loves programming, cloud and photography. Here I will share contents about what I'm learning and working on. Hope you enjoy it!
+Hey, I’m Victor Hugo—a Site Reliability Engineer (SRE) passionate about programming, cloud technologies, and photography. 
+
+This blog is where I share insights, lessons, and projects from my journey. I hope you find something here that inspires or helps you. Enjoy the read!
