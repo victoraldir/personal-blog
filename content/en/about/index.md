@@ -10,7 +10,7 @@ menu:
 
 I am the one in the middle enforcing engeering principles to design, develop, maintain, test, and evaluate computer software. I am also a photographer, a hobbyist, and I love to travel.
 
-I am currently working as a Software Reliabiliy Engineer at [N26](https://n26.com/) with almost 10 years of experience in the field.
+I am currently working as a Software Reliabiliy Engineer at [lastminute.com](https://www.lastminute.com/) with almost 10 years of experience in the field.
 
 As a seasoned software engineer, I possess extensive experience working on large-scale, multilayered, and distributed applications across a variety of industries, including e-commerce, telecommunications, health, financial, and aviation. With a proven track record of success, I am adept at solving complex problems with precision and quality, while consistently meeting project deadlines. Additionally, I possess excellent collaboration skills and I am comfortable working with globally distributed teams.
 
